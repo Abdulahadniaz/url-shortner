@@ -14,13 +14,6 @@ $ npm install
 # development
 $ npm run start
 
-## Technologies👨‍💻.
-
-- [NestJS](https://nestjs.com/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [SQLite](https://www.sqlite.org/index.html)
-- [TypeORM](https://typeorm.io/)
-
 ## Features 🦸
 
 - [x]  Shorten a URL
