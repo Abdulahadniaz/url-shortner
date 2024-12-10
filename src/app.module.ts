@@ -10,19 +10,14 @@ import { UrlModule } from './url/url.module'
         TypeOrmModule.forRootAsync({
             imports: [ConfigModule],
             useFactory: (configService: ConfigService) => ({
-                type: 'sqlite',
-                database: configService.get<string>(
-                    'DATABASE_NAME',
-                    'URL.sqlite'
-                ),
+                type: 'postgres',
+                url: configService.get('DATABASE_URL'),
                 entities: [Url],
-                synchronize: true,
+                synchronize: true, // Be cautious with this in production
             }),
             inject: [ConfigService],
         }),
         UrlModule,
     ],
-    controllers: [],
-    providers: [],
 })
 export class AppModule {}
