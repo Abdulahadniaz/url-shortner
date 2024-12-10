@@ -1,7 +1,8 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsUrl } from 'class-validator'
 
 export class ShortenURLDto {
-  @IsString()
-  @IsNotEmpty()
-  longUrl: string;
+    @IsString()
+    @IsNotEmpty()
+    @IsUrl({}, { message: 'Invalid URL format' })
+    longUrl: string
 }
