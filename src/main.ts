@@ -1,15 +1,23 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
+import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
 
     // Enable CORS
     app.enableCors({
-        origin: process.env.FRONTEND_URL, // Your Next.js frontend URL
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
+        credentials: true,
     })
+
+    // Global pipes
+    app.useGlobalPipes(new ValidationPipe({ whitelist: true }))
+
+    // For Vercel serverless functions
+    app.setGlobalPrefix('api')
 
     await app.listen(process.env.PORT || 3001)
 }

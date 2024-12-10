@@ -2,7 +2,7 @@ import { Controller, Body, Get, Param, Post, Res } from '@nestjs/common'
 import { UrlService } from './url.service'
 import { ShortenURLDto } from './dtos/url.dto'
 
-@Controller()
+@Controller('api')
 export class UrlController {
     constructor(private urlService: UrlService) {}
 
