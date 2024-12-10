@@ -1,19 +1,16 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
-import { ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule)
-    app.useGlobalPipes(new ValidationPipe({ whitelist: true }))
 
-    // Configure CORS
+    // Enable CORS
     app.enableCors({
-        origin: 'http://localhost:3000', // Your Next.js frontend URL
-        methods: ['GET', 'POST', 'OPTIONS'],
+        origin: process.env.FRONTEND_URL, // Your Next.js frontend URL
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true,
     })
 
-    await app.listen(3001) // Change the port to 3001
+    await app.listen(process.env.PORT || 3001)
 }
 bootstrap()
