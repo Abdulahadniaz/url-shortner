@@ -29,7 +29,7 @@ export class UrlService {
         }
 
         const urlCode = nanoid(10)
-        const baseUrl = 'http://localhost:3001'
+        const baseUrl = process.env.BASE_URL
 
         try {
             // check if url has already been shortened, then return it
